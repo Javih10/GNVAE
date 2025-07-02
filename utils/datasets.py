@@ -25,7 +25,9 @@ DATASETS_DICT = {"mnist": "MNIST",
                  "dsprites": "DSprites",
                  "celeba": "CelebA",
                  "chairs": "Chairs",
-                 "geneexpression": "GeneExpression"}
+                 "geneexpression": "GeneExpression", 
+                 "caudate": "Caudate",
+                 "caudategenes": "CaudateGenes"}
 
 DATASETS = list(DATASETS_DICT.keys())
 
@@ -435,7 +437,97 @@ class GeneExpression(DisentangledDataset):
         """Download the dataset."""
         pass
 
+class Caudate(DisentangledDataset):
+    """Gene expression data. Features are samples, examples are genes"""
 
+    files = {"train": "None"}
+    #img_size = (1, 20, 20)
+    background_color = COLOUR_BLACK
+    
+    def __init__(self, root="/", gene_expression_filename=None, **kwargs):
+
+        super().__init__(root, [], **kwargs)
+
+        self.gene_expression_filename = gene_expression_filename
+
+        dfx = pd.read_csv(self.gene_expression_filename, index_col=0,
+                          sep=None, engine='python')
+        self.dfx = dfx
+
+        self.img_size = (1, 1, dfx.shape[1])
+        
+
+        padding = np.product(self.img_size) - dfx.shape[1]
+
+        self.imgs = np.concatenate(
+            [dfx.values.astype(np.float32),
+             np.zeros((dfx.shape[0], padding), dtype=np.float32)],
+             axis =1).reshape((-1,
+                               *self.img_size))
+
+        
+    def __getitem__(self, idx):
+
+        img = torch.from_numpy(self.imgs[idx])
+        
+        #img = self.transforms(img)
+
+        # no label so return 0 (note that can't return None because)
+        # dataloaders requires so
+
+        return img, 0
+
+    
+    def download(self):
+        """Download the dataset."""
+        pass
+        
+class CaudateGenes(DisentangledDataset):
+    """Gene expression data. Features are samples, examples are genes"""
+
+    files = {"train": "None"}
+    #img_size = (1, 20, 20)
+    background_color = COLOUR_BLACK
+    
+    def __init__(self, root="/", gene_expression_filename=None, **kwargs):
+
+        super().__init__(root, [], **kwargs)
+
+        self.gene_expression_filename = gene_expression_filename
+
+        dfx = pd.read_csv(self.gene_expression_filename, index_col=0,
+                          sep=None, engine='python')
+        self.dfx = dfx
+
+        self.img_size = (1, 1, dfx.shape[1])
+        
+
+        padding = np.product(self.img_size) - dfx.shape[1]
+
+        self.imgs = np.concatenate(
+            [dfx.values.astype(np.float32),
+             np.zeros((dfx.shape[0], padding), dtype=np.float32)],
+             axis =1).reshape((-1,
+                               *self.img_size))
+
+        
+    def __getitem__(self, idx):
+
+        img = torch.from_numpy(self.imgs[idx])
+        
+        #img = self.transforms(img)
+
+        # no label so return 0 (note that can't return None because)
+        # dataloaders requires so
+
+        return img, 0
+
+    
+    def download(self):
+        """Download the dataset."""
+        pass
+        
+        
         
 # HELPERS
 def preprocess(root, size=(64, 64), img_format='JPEG', center_crop=None):
