@@ -408,7 +408,7 @@ class GeneExpression(DisentangledDataset):
         self.img_size = (1, 1, dfx.shape[1])
         
 
-        padding = np.product(self.img_size) - dfx.shape[1]
+        padding = np.prod(self.img_size) - dfx.shape[1]
 
 ## PAREI AQUI
 ##apua@qvm8:/ceph/users/apua/projects/gnvae/test/_o_m$ python ../../code/_h/disentangling-vae/main.py myname -x factor_geneexpression -m Fullyconnected5 --dataset geneexpression --gene-expression-filename /ceph/projects/v4_phase3_paper/analysis/gnvae/input/select_samples/prep_data_cv/_m/Fold-alldata/X_train.csv
@@ -457,7 +457,7 @@ class Caudate(DisentangledDataset):
         self.img_size = (1, 1, dfx.shape[1])
         
 
-        padding = np.product(self.img_size) - dfx.shape[1]
+        padding = np.prod(self.img_size) - dfx.shape[1]
 
         self.imgs = np.concatenate(
             [dfx.values.astype(np.float32),
@@ -502,7 +502,7 @@ class CaudateGenes(DisentangledDataset):
         self.img_size = (1, 1, dfx.shape[1])
         
 
-        padding = np.product(self.img_size) - dfx.shape[1]
+        padding = np.prod(self.img_size) - dfx.shape[1]
 
         self.imgs = np.concatenate(
             [dfx.values.astype(np.float32),
