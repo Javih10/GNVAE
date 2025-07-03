@@ -60,7 +60,7 @@ class EncoderBurgess(nn.Module):
             self.conv_64 = nn.Conv2d(hid_channels, hid_channels, kernel_size, **cnn_kwargs)
 
         # Fully connected layers
-        self.lin1 = nn.Linear(np.product(self.reshape), hidden_dim)
+        self.lin1 = nn.Linear(np.prod(self.reshape), hidden_dim)
         self.lin2 = nn.Linear(hidden_dim, hidden_dim)
 
         # Fully connected layers for mean and variance
@@ -121,7 +121,7 @@ class EncoderFullyconnected1(nn.Module):
         
         dims = [128, 64, 32]
         
-        self.lin1 = nn.Linear(np.product(img_size), dims[0])
+        self.lin1 = nn.Linear(np.prod(img_size), dims[0])
         self.lin2 = nn.Linear(dims[0], dims[1])
         self.lin3 = nn.Linear(dims[1], dims[2])
         self.mu_logvar_gen = nn.Linear(dims[2], self.latent_dim * 2)
@@ -177,7 +177,7 @@ class EncoderFullyconnected2(nn.Module):
         
         dims = [4096, 1024]
         
-        self.lin1 = nn.Linear(np.product(img_size), dims[0])
+        self.lin1 = nn.Linear(np.prod(img_size), dims[0])
         self.lin2 = nn.Linear(dims[0], dims[1])
         self.mu_logvar_gen = nn.Linear(dims[1], self.latent_dim * 2)
 
@@ -229,7 +229,7 @@ class EncoderFullyconnected3(nn.Module):
         
         dims = [1024, 1024]
         
-        self.lin1 = nn.Linear(np.product(img_size), dims[0])
+        self.lin1 = nn.Linear(np.prod(img_size), dims[0])
         self.lin2 = nn.Linear(dims[0], dims[1])
         self.mu_logvar_gen = nn.Linear(dims[1], self.latent_dim * 2)
 
@@ -281,7 +281,7 @@ class EncoderFullyconnected4(nn.Module):
         
         dims = [128, 32]
         
-        self.lin1 = nn.Linear(np.product(img_size), dims[0])
+        self.lin1 = nn.Linear(np.prod(img_size), dims[0])
         self.lin2 = nn.Linear(dims[0], dims[1])
         self.mu_logvar_gen = nn.Linear(dims[1], self.latent_dim * 2)
 
@@ -334,7 +334,7 @@ class EncoderFullyconnected5(nn.Module):
         
         dims = [128]
         
-        self.lin1 = nn.Linear(np.product(img_size), dims[0])
+        self.lin1 = nn.Linear(np.prod(img_size), dims[0])
         self.mu_logvar_gen = nn.Linear(dims[0], self.latent_dim * 2)
 
 
