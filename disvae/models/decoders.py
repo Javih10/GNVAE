@@ -52,7 +52,7 @@ class DecoderBurgess(nn.Module):
         # Fully connected layers
         self.lin1 = nn.Linear(latent_dim, hidden_dim)
         self.lin2 = nn.Linear(hidden_dim, hidden_dim)
-        self.lin3 = nn.Linear(hidden_dim, np.product(self.reshape))
+        self.lin3 = nn.Linear(hidden_dim, np.prod(self.reshape))
 
         # Convolutional layers
         cnn_kwargs = dict(stride=2, padding=1)
@@ -116,7 +116,7 @@ class DecoderFullyconnected1(nn.Module):
         self.lin0 = nn.Linear(latent_dim, dims[2])
         self.lin1 = nn.Linear(dims[2], dims[1])
         self.lin2 = nn.Linear(dims[1], dims[0])
-        self.lin3 = nn.Linear(dims[0], np.product(self.img_size))
+        self.lin3 = nn.Linear(dims[0], np.prod(self.img_size))
         
     def forward(self, z):
         batch_size = z.size(0)
@@ -163,7 +163,7 @@ class DecoderFullyconnected2(nn.Module):
         
         self.lin0 = nn.Linear(latent_dim, dims[1])
         self.lin1 = nn.Linear(dims[1], dims[0])
-        self.lin2 = nn.Linear(dims[0], np.product(self.img_size))
+        self.lin2 = nn.Linear(dims[0], np.prod(self.img_size))
         
     def forward(self, z):
         batch_size = z.size(0)
@@ -209,7 +209,7 @@ class DecoderFullyconnected3(nn.Module):
         
         self.lin0 = nn.Linear(latent_dim, dims[1])
         self.lin1 = nn.Linear(dims[1], dims[0])
-        self.lin2 = nn.Linear(dims[0], np.product(self.img_size))
+        self.lin2 = nn.Linear(dims[0], np.prod(self.img_size))
         
     def forward(self, z):
         batch_size = z.size(0)
@@ -256,7 +256,7 @@ class DecoderFullyconnected4(nn.Module):
         
         self.lin0 = nn.Linear(latent_dim, dims[1])
         self.lin1 = nn.Linear(dims[1], dims[0])
-        self.lin2 = nn.Linear(dims[0], np.product(self.img_size))
+        self.lin2 = nn.Linear(dims[0], np.prod(self.img_size))
         
     def forward(self, z):
         batch_size = z.size(0)
@@ -301,7 +301,7 @@ class DecoderFullyconnected5(nn.Module):
         dims = [128]
         
         self.lin0 = nn.Linear(latent_dim, dims[0])
-        self.lin1 = nn.Linear(dims[0], np.product(self.img_size))
+        self.lin1 = nn.Linear(dims[0], np.prod(self.img_size))
         
     def forward(self, z):
         batch_size = z.size(0)
