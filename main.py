@@ -22,7 +22,7 @@ from utils.visualize import GifTraversalsTraining
 # Config file is in same directory as the main.py script
 
 CONFIG_FILE = os.path.join(os.path.dirname(getsourcefile(lambda:0)), "hyperparam.ini")
-RES_DIR = "results_ld15"
+RES_DIR = "results_ld20"
 LOG_LEVELS = list(logging._levelToName.values())
 ADDITIONAL_EXP = ['custom', "debug", "best_celeba", "best_dsprites"]
 EXPERIMENTS = ADDITIONAL_EXP + ["{}_{}".format(loss, data)
