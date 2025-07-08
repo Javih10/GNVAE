@@ -292,7 +292,7 @@ class DecoderFullyconnected5(nn.Module):
 
      """
 
-    def __init__(self, img_size, latent_dim=10):
+    def __init__(self, img_size, latent_dim=10): #, dropout_p = 0.2):
         super(DecoderFullyconnected5, self).__init__()
         
         self.latent_dim = latent_dim
@@ -301,6 +301,7 @@ class DecoderFullyconnected5(nn.Module):
         dims = [128]
         
         self.lin0 = nn.Linear(latent_dim, dims[0])
+        #self.dropout = nn.Dropout(dropout_p)
         self.lin1 = nn.Linear(dims[0], np.prod(self.img_size))
         
     def forward(self, z):
