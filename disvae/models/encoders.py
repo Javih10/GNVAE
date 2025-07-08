@@ -325,7 +325,7 @@ class EncoderFullyconnected5(nn.Module):
 
    """
     
-    def __init__(self, img_size, latent_dim=128): #, dropout_p = 0.2):
+    def __init__(self, img_size, latent_dim=128, dropout_p = 0.2):
 
         super(EncoderFullyconnected5, self).__init__()
 
@@ -335,7 +335,7 @@ class EncoderFullyconnected5(nn.Module):
         dims = [128]
         
         self.lin1 = nn.Linear(np.prod(img_size), dims[0])
-        #self.dropout = nn.Dropout(dropout_p)
+        self.dropout = nn.Dropout(dropout_p)
         self.mu_logvar_gen = nn.Linear(dims[0], self.latent_dim * 2)
 
 
