@@ -22,7 +22,7 @@ from utils.visualize import GifTraversalsTraining
 # Config file is in same directory as the main.py script
 
 CONFIG_FILE = os.path.join(os.path.dirname(getsourcefile(lambda:0)), "hyperparam.ini")
-RES_DIR = "results_ld20"
+RES_DIR = "results_ld15_v2"
 LOG_LEVELS = list(logging._levelToName.values())
 ADDITIONAL_EXP = ['custom', "debug", "best_celeba", "best_dsprites"]
 EXPERIMENTS = ADDITIONAL_EXP + ["{}_{}".format(loss, data)
@@ -237,7 +237,7 @@ def main(args):
         logger.info('Num parameters in model: {}'.format(get_n_param(model)))
 
         # TRAINS
-        optimizer = optim.Adam(model.parameters(), lr=args.lr)
+        optimizer = optim.Adam(model.parameters(), lr=args.lr, weight_decay = 1e-5)
 
         model = model.to(device)  # make sure trainer and viz on same device
         #gif_visualizer = GifTraversalsTraining(model, args.dataset, exp_dir)
